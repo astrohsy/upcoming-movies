@@ -1,6 +1,10 @@
 {
   "name": "starter-node-angular",
   "main": "server.js",
+  "engines": {
+    "node": "~5.5.0",
+    "npm": "~3.3.12"
+    },
   "dependencies": {
     "body-parser": "~1.4.2",
     "cheerio": "^0.20.0",
