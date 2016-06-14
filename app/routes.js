@@ -17,6 +17,23 @@ var movieInfos = require('../server.js')
      app.set('superSecret', config.secret);
      // sample api route
 
+     // 회원가입
+     app.post('/api/setup', function(req, res) {
+       var newUser = new User({
+         name : req.body.name,
+         password: req.body.password,
+         admin : true
+       });
+
+       newUser.save(function(err) {
+         if (err) throw err;
+
+         console.log('User saved successfully');
+         res.json({ success: true });
+       });
+     });
+
+
      app.post('/api/authenticate', function(req, res) {
 
        // Find the User
@@ -80,6 +97,7 @@ var movieInfos = require('../server.js')
      });
 
 
+
      app.get('/api/reviews', function(req, res) {
 
        //-----------
@@ -96,22 +114,6 @@ var movieInfos = require('../server.js')
      app.get('/api/users', function(req, res) {
        User.find({}, function(err, users) {
          res.json(users);
-       });
-     });
-
-     // User Db handle requests =================================================
-     app.post('/api/setup', function(req, res) {
-       var newUser = new User({
-         name : req.body.name,
-         password: req.body.password,
-         admin : true
-       });
-
-       newUser.save(function(err) {
-         if (err) throw err;
-
-         console.log('User saved successfully');
-         res.json({ success: true });
        });
      });
 

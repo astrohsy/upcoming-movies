@@ -8,5 +8,10 @@ angular.module('LoginService', [])
 
     getAllUsers: function(token) {
       return $http.get('/api/users')
+    },
+
+    putUser: function(name, password) {
+      var data = { name: name, password: password}
+      return $http.post('/api/setup', data, {});
     }
   }}])

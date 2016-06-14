@@ -48,4 +48,11 @@ angular.module('LoginCtrl', ['LoginService', 'ngCookies'])
         $rootScope.myAuth = false;
       };
 
+// Register User
+      $scope.register = function() {
+        Login.putUser($scope.login.email, $scope.login.password).then(function() {
+          $window.alert('Register Completed');
+        })
+      }
+
     }])
