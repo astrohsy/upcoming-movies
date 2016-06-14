@@ -1,0 +1,35 @@
+/* Source from : http://www.nxworld.net/tips/css-tag-cloud.html */
+
+.tag ul {
+	margin-top: 15px;
+	padding: 0;
+	list-style: none;
+}
+.tag ul li {
+	display: inline-block;
+	margin: 0 .3em .3em 0;
+	padding: 0;
+}
+.tag ul li a {
+	display: inline-block;
+	max-width: 200px;
+	height: 28px;
+	line-height: 28px;
+	padding: 0 1em;
+	background-color: #fff;
+	border: 1px solid #aaa;
+	border-radius: 3px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: #333;
+	font-size: 13px;
+	text-decoration: none;
+	-webkit-transition: .2s;
+	transition: .2s;
+}
+.tag ul li a:hover {
+	background-color: #cab08f;
+	border: 1px solid #cab08f;
+	color: #fff;
+}
