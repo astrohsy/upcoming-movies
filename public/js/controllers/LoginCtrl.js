@@ -50,9 +50,13 @@ angular.module('LoginCtrl', ['LoginService', 'ngCookies'])
 
 // Register User
       $scope.register = function() {
-        Login.putUser($scope.login.email, $scope.login.password).then(function() {
-          $window.alert('Register Completed');
-        })
+        if($scope.login.email == "" || $scope.login.password == "") {
+          $window.alert('No Blank!');
+        }
+        else {
+          Login.putUser($scope.login.email, $scope.login.password).then(function() {
+            $window.alert('Register Completed');
+        });
       }
-
-    }])
+    }
+    }]);
