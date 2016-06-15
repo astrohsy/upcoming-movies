@@ -1,7 +1,12 @@
 angular.module('SettingService', []).factory('Setting', ['$http', function($http) {
 
  return {
-    get : function() {
+    saveStatus : function() {
+
+    },
+
+    getStatus : function() {
+
     }
   }
 }])

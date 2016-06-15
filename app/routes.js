@@ -1,7 +1,10 @@
 // app/routes.js
 
 // grab the nerd model we just created
-var User = require('./models/users');
+var User = require('./models/users.js');
+var Stat = require('./models/status.js');
+
+// Configuration created
 var jwt  = require('jsonwebtoken');
 var config = require('../config/db.js');
 var reviewCrawler = require('./scaraping.js');
@@ -96,24 +99,48 @@ var movieInfos = require('../server.js')
 
      });
 
+     app.post('/api/status/update', function(req, res) {
+       Stat.remove({'name' : req.body.name })
+        var newStat = new Stat({
+        name : req.body.name,
+        status: req.body.status,
+      });
 
+      Stat.save(function(err, res) {
+        if(err) console.log('/api/status/update error');
+      });
+
+        console.log('User saved successfully');
+        res.json({ success: true });
+     });
+
+     app.get('api/status/get', function(req, res) {
+       Stat.findOne({name : req.body.name}, function(err, res) {
+         if(err) {
+           consoloe.log('api/status/get error');
+           res.json({
+             success : false
+           });
+         }
+         else {
+           res.json({
+             success : true,
+             status : status
+           });
+         }
+       });
+     })
 
      app.get('/api/reviews', function(req, res) {
-
-       //-----------
-
-       //-------------------------
-       console.log(movieInfos.movieInfos);
        res.json({
          reviews : movieInfos
        });
      });
 
-
      // route to return all users
      app.get('/api/users', function(req, res) {
-       User.find({}, function(err, users) {
-         res.json(users);
+       User.find({}, function(db_err, db_res) {
+         res.json({status : db_res.status});
        });
      });
 

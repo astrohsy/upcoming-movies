@@ -33,3 +33,36 @@
 	border: 1px solid #cab08f;
 	color: #fff;
 }
+
+/* toogle button */
+.toggle-button {
+	background-color: white;
+	margin: 5px 10px;
+	border-radius: 20px;
+	border: 2px solid #D0D0D0;
+	height: 36px;
+	cursor: pointer;
+	width: 100px; position:
+	relative; display:
+	inline-block;
+	user-select:
+	none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+.toggle-button-on {
+	background-color: #5bc0de;
+	margin: 5px 10px;
+	border-radius: 20px;
+	border: 2px solid #D0D0D0;
+	height: 36px;
+	cursor: pointer;
+	width: 100px; position:
+	relative; display:
+	inline-block;
+	user-select:
+	none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
