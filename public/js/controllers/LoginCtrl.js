@@ -50,13 +50,18 @@ angular.module('LoginCtrl', ['LoginService', 'ngCookies'])
 
 // Register User
       $scope.register = function() {
-        if($scope.login.email == "" || $scope.login.password == "") {
+        if(angular.isUndefined($scope.login)) {
           $window.alert('No Blank!');
         }
         else {
-          Login.putUser($scope.login.email, $scope.login.password).then(function() {
-            $window.alert('Register Completed');
-        });
+          if(angular.isUndefined($scope.login.email) || angular.isUndefined($scope.login.password)) {
+            $window.alert('No Blank!');
+          }
+          else {
+            Login.putUser($scope.login.email, $scope.login.password).then(function() {
+              $window.alert('Register Completed');
+            });
+          }
       }
     }
     }]);
