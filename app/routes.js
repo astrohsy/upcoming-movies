@@ -28,11 +28,20 @@ var movieInfos = require('../server.js')
          admin : true
        });
 
+       var newStat = new Stat({
+         name : req.body.name,
+         genre : ['Action', 'Adventure', 'Comedy', 'Fantasy', 'Sci-Fi','Music', 'Documentary', 'Biography', 'Mystery','Thriller', 'Drama', 'Romance', 'Crime']
+       });
+
        newUser.save(function(err) {
          if (err) throw err;
 
-         console.log('User saved successfully');
-         res.json({ success: true });
+         newStat.save(function(err) {
+           if(err) throw err;
+
+           console.log('User saved successfully');
+           res.json({ success: true });
+         })
        });
      });
 
@@ -62,7 +71,7 @@ var movieInfos = require('../server.js')
              console.log('allowed');
 
              var token = jwt.sign(user, app.get('superSecret'), {
-               expiresIn: 1440 // 24 hours
+               expiresIn: 2440 // 24 hours
              });
 
              res.json({
@@ -100,22 +109,32 @@ var movieInfos = require('../server.js')
      });
 
      app.post('/api/status/update', function(req, res) {
-       Stat.remove({'name' : req.body.name })
+
+       /*
+       Stat.remove({name : req.body.username })
         var newStat = new Stat({
-        name : req.body.name,
-        status: req.body.status,
+        name : req.body.username,
+        genre: req.body.genres,
       });
 
-      Stat.save(function(err, res) {
+
+      newStat.save(function(err, res) {
         if(err) console.log('/api/status/update error');
       });
 
         console.log('User saved successfully');
         res.json({ success: true });
+
+        */
+
+        console.log('User saved successfully');
+        Stat.update({name : req.body.username}, {$set: {genre : req.body.genres}}, function(err, user) {
+          if(err) return err;
+        });
      });
 
-     app.get('api/status/get', function(req, res) {
-       Stat.findOne({name : req.body.name}, function(err, res) {
+     app.post('/api/status/get', function(req, res) {
+       Stat.findOne({name : req.body.name}, function(err, db_res) {
          if(err) {
            consoloe.log('api/status/get error');
            res.json({
@@ -123,23 +142,22 @@ var movieInfos = require('../server.js')
            });
          }
 
-         if(res) {
+         if(db_res) {
            res.json({
              success : true,
-             status : status
+             genre : db_res.genre
            });
          }
          else {
            res.json({
              success: true,
-             status : ['Action', 'Adventure', 'Comedy', 'Fantasy', 'Sci-Fi','Music', 'Drama', 'Documentary', 'Biography', 'Crime', 'Mystery','Thriller', 'Drama', 'Romance', 'Crime']
+             genre : ['Action', 'Adventure', 'Comedy', 'Fantasy', 'Sci-Fi','Music', 'Documentary', 'Biography', 'Mystery','Thriller', 'Drama', 'Romance', 'Crime']
            });
          }
-
-
-
        });
      })
+
+
 
      app.get('/api/reviews', function(req, res) {
        res.json({
