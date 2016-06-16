@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('SettingCtrl', ['SettingService']).controller('SettingController', [
-  '$scope', 'Setting',
-  function($scope, Setting) {
+angular.module('SettingCtrl', ['SettingService', 'ngCookies']).controller('SettingController', [
+  '$scope', 'Setting', '$cookieStore',
+  function($scope, Setting, $cookieStore) {
     $scope.genres = ['Action', 'Adventure', 'Comedy', 'Fantasy', 'Sci-Fi','Music', 'Drama', 'Documentary', 'Biography', 'Crime', 'Mystery','Thriller', 'Drama', 'Romance', 'Crime'];
     $scope.user_info = ['Action', 'Adventure', 'Comedy', 'Music', 'Drama', 'Documentary', 'Biography', 'Crime', 'Mystery','Thriller', 'Drama', 'Romance', 'Crime'];
 
@@ -30,6 +30,20 @@ angular.module('SettingCtrl', ['SettingService']).controller('SettingController'
     $scope.toggle = function () {
         this.genre.state =! this.genre.state; // 반대 부호로
     };
+
+    $scope.saveInfo = function() {
+      var new_user_info = [];
+      for(var i in $scope.states) {
+        if($scope.states[i].state) {
+          new_user_info.push($scope.states[i].name);
+        }
+      }
+
+      Setting.saveStatus({
+        name : $cookieStore.get('User'),
+        genres : new_user_info
+      }, $cookieStore.get('Token'));
+    }
 
 
 

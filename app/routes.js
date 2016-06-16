@@ -122,12 +122,22 @@ var movieInfos = require('../server.js')
              success : false
            });
          }
-         else {
+
+         if(res) {
            res.json({
              success : true,
              status : status
            });
          }
+         else {
+           res.json({
+             success: true,
+             status : ['Action', 'Adventure', 'Comedy', 'Fantasy', 'Sci-Fi','Music', 'Drama', 'Documentary', 'Biography', 'Crime', 'Mystery','Thriller', 'Drama', 'Romance', 'Crime']
+           });
+         }
+
+
+
        });
      })
 
