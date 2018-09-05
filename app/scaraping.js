@@ -13,8 +13,6 @@ module.exports = function() {
       request(url , function(error, response, html){
         if (error) {throw error};
 
-        // console.log (html);
-
         var $ = cheerio.load(html);
 
         $movie_come_day = null;
@@ -37,13 +35,14 @@ module.exports = function() {
                 myJson.m_title = $(this).text();
                 myJson.m_link = $(this).attr('href');
               });
-              $(this).find('span[itemprop="director"]').find('span[itemprop="name"]').find('a').each(function() {
+              $(this).find('.txt-block').find('a').each(function() {
                 myJson.m_director = $(this).text();
               });
 
               var genre_box = [];
               $(this).find('.cert-runtime-genre').each(function() {
-                $(this).find('span[itemprop="genre"]').each(function() {
+                $(this).find('span').not('.ghost').each(function() {
+                  //ul#list li:not(.active)
                   genre_box.push($(this).text());
                 });
               });
@@ -56,6 +55,7 @@ module.exports = function() {
               myJson.image = $(this).attr('src');
             });
             movieReviews.push(myJson);
+            //console.log(movieReviews)
           }
         });
 

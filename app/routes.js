@@ -57,20 +57,24 @@ var movieInfos = require('../server.js')
 
          if(!user) {
            res.json( { success: false, message: 'Authentication Failed. User not found'});
-           console.log('not allowed');
          }
          else if(user) {
 
            // 비밀번호 확인
            if (user.password != req.body.password) {
-             console.log('not2 allowed');
              res.json({ success: false, message: 'Authentication Failed. Wrong Password'});
            }
            else {
              // 유저 확인 됨.
-             console.log('allowed');
+             console.log(app.get('superSecret'));
+             
+             const hello = {};
+             hello.name = user.name;
+             hello.password = user.password;
+             hello.admin = user.admin;
+             console.log(hello)
 
-             var token = jwt.sign(user, app.get('superSecret'), {
+             var token = jwt.sign(hello, app.get('superSecret'), {
                expiresIn: 2440 // 24 hours
              });
 
