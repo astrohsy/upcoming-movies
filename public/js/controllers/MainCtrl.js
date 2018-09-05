@@ -11,7 +11,7 @@ angular.module('MainCtrl', ['ReviewService', 'SettingService', 'ngCookies'])
     }
     else {
 
-      return Math.round((openDate-date.getTime()) / 86400000) + ' Days Left to be Released';
+      return Math.round((openDate-date.getTime()) / 86400000) + ' days left to be released';
     }
   }
 

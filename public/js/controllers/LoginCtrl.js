@@ -55,7 +55,7 @@ angular.module('LoginCtrl', ['LoginService', 'ngCookies'])
         }
         else {
           if(angular.isUndefined($scope.login.email) || angular.isUndefined($scope.login.password)) {
-            $window.alert('No Blank!');
+            $window.alert('Fill out both username and password!');
           }
           else {
             Login.putUser($scope.login.email, $scope.login.password).then(function() {
