@@ -33,7 +33,7 @@
 
 <body ng-app="LoginCtrl" ng-controller="LoginController" ng-init = "checkLogin()">
   <!-- HEADER -->
-  <nav class="navbar navbar-default navbar-static-top">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <a class="navbar-brand" href="#">MY Movie Timer</a>
     <div class="container">
       <ul class="nav navbar-nav">
@@ -55,7 +55,7 @@
   <div class="container">
 
     <!-- Angular Dynamic Content -->
-    <div ng-view></div>
+    <div class="view" ng-view></div>
 
   </div>
 </body>
