@@ -3,7 +3,7 @@
 angular.module('SettingCtrl', ['SettingService', 'ngCookies']).controller('SettingController', [
   '$scope', 'Setting', '$cookieStore',
   function($scope, Setting, $cookieStore) {
-    $scope.genres = ['Action', 'Adventure', 'Comedy', 'Fantasy', 'Sci-Fi','Music', 'Documentary', 'Biography', 'Mystery','Thriller', 'Drama', 'Romance', 'Crime']
+    $scope.genres = ['Action', 'Adventure', 'Comedy', 'Fantasy', 'Horror', 'Sci-Fi', 'Music', 'Documentary', 'Biography', 'Mystery','Thriller', 'Drama', 'Romance', 'Crime']
     $scope.states = [];
 
     Setting.getStatus({name: $cookieStore.get('User')} ,$cookieStore.get('Token')).then(function(response){
